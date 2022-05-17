@@ -1,0 +1,220 @@
+<div class="content-right-box">
+    <div class="row">
+        <div class="header-title">
+            <fa-icon [icon]="faComments"></fa-icon> Testimonials
+        </div><!-- end header-title-->
+    </div>
+ 
+    <div class="row">
+        <div class="col-md-12">
+            <div class="testi-form">
+                <form [formGroup]="form" (ngSubmit)="addTesti()">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend override-input-prepend">
+                                    <fa-icon [icon]="faUser" class="fuser"></fa-icon>
+                                </div>
+                                <!-- <input type="text" class="form-control" id="pname" placeholder="Name" value=""> -->
+                                <input
+                                    formControlName="name"
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Name"
+                                    [ngClass]="{'is-invalid':f['name'].touched && f['name'].invalid, 
+                                                'is-valid': f['name'].untouched && f['name'].valid}">
+                                    <div *ngIf="f['name'].touched && f['name'].invalid" class="invalid-feedback">
+                                        Please provide a name.
+                                    </div>
+                            </div>
+                        </div>
+    
+                        <div class="col-md-12">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend override-input-prepend">
+                                    <fa-icon [icon]="faCommentAlt" class="fcomment"></fa-icon>
+                                </div>
+                                <textarea
+                                    formControlName="testimonials" 
+                                    class="form-control" 
+                                    id="testimonials" 
+                                    name="testimonials" 
+                                    placeholder="Testimonial" 
+                                    rows="3"
+                                    [ngClass]="{'is-invalid':f['testimonials'].touched && f['testimonials'].invalid, 
+                                                'is-valid': f['testimonials'].untouched && f['testimonials'].valid}">
+                                </textarea>
+                                <div *ngIf="f['testimonials'].touched && f['testimonials'].invalid" class="invalid-feedback">
+                                    Please provide a testimonials.
+                                </div>
+                            </div>
+                        </div>
+                    </div><!-- end row-->
+                      <div class="d-flex justify-content-end button-post">
+                        <button class="btn btn-primary savebtn" role="button" type="submit" [disabled]="!form.valid"><fa-icon [icon]="faCommentDots"></fa-icon> Post</button>
+                       </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- empty testiomonial -->
+    <div class="row" *ngIf="!getTestiResult">
+        <div class="col-md-12">
+            <ul id="comments-list" class="comments-list">
+                <li>
+                    <div class="comment-main-level">
+                        <div class="comment-box">
+                            <div class="comment-content">
+                                No Testimonial Yet!
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- end of empty testiomonial -->
+    <div class="row">
+        <div class="col-md-12">
+            <ng-template ngFor let-getAllTestimonial [ngForOf]="getTestiResult | paginate
+            : {
+                itemsPerPage: tableSize,
+                currentPage: page,
+                totalItems: count
+            }" let-i="index">
+            <ul id="comments-list" class="comments-list testi-list">
+                <li>
+                    <div class="comment-main-level">
+                        <!-- comment area -->
+                        
+                        <div class="comment-box">
+                            <div class="comment-head"> 
+                                <h6 class="comment-name">{{ getAllTestimonial.name }}</h6>
+                                <span class="badge badge-info badge-comment mr-2 ">{{ getAllTestimonial.country }}</span>
+                                <span class="postedDate">{{ getAllTestimonial.postedon | dateAgo }}</span>
+                             </div>
+                            <div class="comment-content">
+                                {{ getAllTestimonial.testimonials }}
+                                
+                            </div>
+                        </div>
+                   </div>
+                    <div class="row">
+                        <div class="col-md-12 button-reply text-right">
+                            <button class="btn btn-primary savebtn" type="button" data-toggle="collapse" [attr.data-target]="'#replyArea'+ getAllTestimonial.key" aria-expanded="false" [attr.aria-controls]="'replyArea'+ getAllTestimonial.key" (click)="onItemSelector(getAllTestimonial.key)"><fa-icon [icon]="faMailReply"></fa-icon> Reply</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="collapse replyCollapse" id="replyArea{{getAllTestimonial.key}}">
+                                <div class="card card-body">
+                                    <form [formGroup]="replyForm" (ngSubmit)="addReplies()">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend override-input-prepend align-middle">
+                                                        <fa-icon [icon]="faUser" class="fuser"></fa-icon>
+                                                    </div>
+                                                    <input
+                                                    formControlName="name"
+                                                    id="name{{ getAllTestimonial.key }}"
+                                                    name="name{{ getAllTestimonial.key }}"
+                                                    type="text"
+                                                    class="form-control"
+                                                    placeholder="Name"
+                                                    [ngClass]="{'is-invalid':rF['name'].touched && rF['name'].invalid, 
+                                                                'is-valid': rF['name'].untouched && rF['name'].valid}">
+                                                    <div *ngIf="rF['name'].touched && rF['name'].invalid" class="invalid-feedback">
+                                                        Please provide a name.
+                                                    </div>
+                                                </div>
+                                            </div>
+                        
+                                            <div class="col-md-12">
+                                                <div class="input-group mb-3">
+                                                    <div class="input-group-prepend override-input-prepend">
+                                                        <fa-icon [icon]="faCommentAlt" class="fcomment"></fa-icon>
+                                                    </div>
+                                                    <textarea
+                                                    formControlName="reply" 
+                                                    class="form-control" 
+                                                    id="reply{{ getAllTestimonial.key }}" 
+                                                    name="reply{{ getAllTestimonial.key }}" 
+                                                    placeholder="Your Reply" 
+                                                    rows="3"
+                                                    [ngClass]="{'is-invalid':rF['reply'].touched && rF['reply'].invalid, 
+                                                                'is-valid': rF['reply'].untouched && rF['reply'].valid}">
+                                                </textarea>
+                                                <div *ngIf="rF['reply'].touched && rF['reply'].invalid" class="invalid-feedback">
+                                                    Please provide a reply.
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div><!-- end row-->
+                                        <div class="row mt-4">
+                                            <div class="col-md-8">
+                                                <div class="d-flex justify-content-start commentName">
+                                                    <h5>Reply to <span>{{ getAllTestimonial.name }}</span>  's Post</h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="d-flex justify-content-end button-post">
+                                                    <button class="btn btn-primary savebtn" role="button" id="{{ getAllTestimonial.key }}" name="{{ getAllTestimonial.key }}" type="submit" [disabled]="!replyForm.valid"><fa-icon [icon]="faCommentDots"></fa-icon> Post</button>
+                                                   </div>
+                                            </div>
+                                        </div>
+                                          
+                                    </form>
+                                </div>
+                              </div>
+                        </div>
+                    </div>
+                    <!-- Reply area -->
+                    <ul class="comments-list reply-list">
+                        <li *ngFor="let getAllReplies of getReplyResult">
+                            <!-- reply box-->
+                            <div class="comment-box" *ngIf="getAllReplies.tid == getAllTestimonial.key ">
+                                <div class="comment-head">
+                                    <h6 class="comment-name replyname">{{getAllReplies.name}}</h6>
+                                    <span class="badge badge-info mr-2">{{getAllReplies.country}}</span>
+                                    <span class="postedDate">{{ getAllReplies.postedon | dateAgo }} </span>
+                                </div>
+                                <div class="comment-content">
+                                    {{getAllReplies.reply}}
+                                </div>
+                            </div>
+                        </li>
+                    </ul><!-- end of reply-list -->
+                </li>
+    
+
+            </ul><!-- end of comment-list -->
+        </ng-template>
+        </div> 
+    </div>
+    
+    
+    <div class="row mt-4">
+        <div class="col-md-2">
+            <div class="d-flex justify-content-start">
+                <select (change)="onTableSizeChange($event)" class="custom-select select-pagi">
+                    <option *ngFor="let size of tableSizes" [ngValue]="size">
+                      {{ size }}
+                    </option> 
+                  </select>
+            </div>
+        </div>
+        <div class="col-md-10">
+             <div class="d-flex justify-content-end pagi-numbers">
+                <pagination-controls
+                    previousLabel="Prev"
+                    nextLabel="Next"
+                    (pageChange)="onTableDataChange($event)"
+                >
+                </pagination-controls>
+             </div>
+        </div>
+    </div>
+</div><!-- end content-right-box-->	
