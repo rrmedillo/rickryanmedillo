@@ -34,7 +34,7 @@ export class SidebarComponent implements OnInit {
   faDownload = faDownload;
 
   // like
-  ipAddress:any;
+  ipAddress?:string;
   visitorCountry:any;
 
   visitorIP: any;
@@ -84,7 +84,6 @@ export class SidebarComponent implements OnInit {
     this.fetchLikes();
     this.fetchVisitors();
     this.fetchTestimonials();
-
   }
 
   fetchTestimonials(): void {
@@ -99,6 +98,14 @@ export class SidebarComponent implements OnInit {
       this.counttestimonials = data.length;
     })
   }
+
+  // fetchVisitorIp(): void {
+  //   this.visitorService.getVisitor(this.ipAddress).valueChanges()
+  //   .subscribe((data: Visitors[] | undefined) => {
+  //     this.visitors = data;
+  //     console.log(this.visitors)
+  //   })
+  // }
   
   fetchVisitors(): void {
     let currentDateTime =this.datepipe.transform((new Date), 'MMMM d, y');
@@ -115,7 +122,7 @@ export class SidebarComponent implements OnInit {
       if(this.countvisitors == 0) {
         // console.log('true')
         this.getIpResult = this.ipAddress;
-        this.addVisitors();
+        // this.addVisitors();
       } else {
         // console.log('false')
         this.visitors.forEach((element: any) => {
@@ -137,11 +144,11 @@ export class SidebarComponent implements OnInit {
             this.getKeyResult = this.passUserKey;
             this.getVisitedResult = this.passUserVisited;
             // console.log(this.getVisitedResult) 
-            this.update();
+            // this.update();
           }
         } else {
           this.getIpResult = this.ipAddress;
-           this.addVisitors();
+          //  this.addVisitors();
         }
       }
     })

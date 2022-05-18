@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function(){
 }, false);
 
 async function downloadFile(fileName) {
-    const url = 'https://rickryanmedillo.netlify.app/assets/RickRyanMedillo.docx';
+    const url = 'https://rickryan-portfolio.web.app/assets/rickryanmedillo-resume.docx';
 
     const link = document.createElement('a');
     link.href = await toDataURL(url);

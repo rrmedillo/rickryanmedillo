@@ -24,7 +24,7 @@ export class VisitorsService {
     this.visitorsRef = db.list(this.dbPath);
   }
 
-  getVisitor(user_ip: any) {
+  getVisitor(user_ip: string) {
     return this.visitorRef = this.db.object(`/visitors/` + user_ip);
   }
 
