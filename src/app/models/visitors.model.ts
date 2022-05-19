@@ -1,6 +1,6 @@
 export class Visitors {
     key?: string | null;
-    user_ip?: any ;
+    user_ip?: any;
     country?: any ;
     visited?: Number ;
     postedon?: any;

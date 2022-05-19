@@ -4,6 +4,7 @@
     </div><!-- end header-title-->
     
     <div class="visitor">
+      
       <div class="row">
         <div class="col-md-6 visible-phone d-none">
           <div class="d-flex justify-content-start bd-highlight mb-2">
@@ -64,8 +65,9 @@
                   <td colspan="5">No Visitors Yet!</td>
                 </tr>
                 <!-- end of empty visitor -->
-                <tr *ngFor="let getVisit of getResult">
-                  <td>{{ getVisit.user_ip }}</td>
+                <tr *ngFor="let getVisit of getResult" let i="index">
+                  <!-- <td>{{ getVisit.user_ip }}</td> -->
+                  <td>{{ convertIp(getVisit.user_ip) }}</td>
                   <td>{{ getVisit.country }}</td>
                   <td>{{ getVisit.visited }}</td>
                   <td>{{ getVisit.postedon | dateAgo }}</td>

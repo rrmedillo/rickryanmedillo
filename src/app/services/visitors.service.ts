@@ -5,27 +5,35 @@ import {
   AngularFireList,
   AngularFireObject
 } from '@angular/fire/compat/database';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VisitorsService {
+  user_ip?: Visitors;
   status?: [] | any;
   visitorStatus: Visitors;
- 
-  private dbPath = '/visitors';
+  // visitorData: Observable<Visitors>;
+  
+  private dbPath = 'visitors';
   visitorsRef: AngularFireList<Visitors>;
   visitorRef: AngularFireObject<Visitors> | any;
- 
-  constructor(private db: AngularFireDatabase) { 
+  visitRef: any;
+  
+  constructor(
+    private db: AngularFireDatabase,
+    public fireDb: AngularFirestore
+    ) { 
     this.visitorStatus = new Visitors();
     this.visitorStatus.status = {"status":"Failed"};
     this.status = this.visitorStatus.status;
     this.visitorsRef = db.list(this.dbPath);
+    // this.visitRef = fireDb.collection('visitors');
   }
 
-  getVisitor(user_ip: string) {
-    return this.visitorRef = this.db.object(`/visitors/` + user_ip);
+  getVisitor(user_ip: any): AngularFireList<Visitors> {
+    return this.db.list('visitors', ref => ref.orderByChild('user_ip').equalTo(user_ip));
   }
 
   getAll(): AngularFireList<Visitors> {

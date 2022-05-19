@@ -56,7 +56,9 @@ import { environment } from '../environments/environment';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot({
+      preventDuplicates: true
+    })
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

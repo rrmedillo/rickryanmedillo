@@ -24,8 +24,8 @@ export class TestimonialsService {
     this.testimonialsRef = db.list(this.dbPath);
   }
 
-  getTesti(user_ip: any) {
-    return this.testimonialRef = this.db.object(`/testimonials/` + user_ip);
+  getTesti(key: any) {
+    return this.testimonialRef = this.db.object(`/testimonials/` + key);
   }
 
   getAll(): AngularFireList<Testimonials> {

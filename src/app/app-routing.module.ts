@@ -9,8 +9,8 @@ import { WorkComponent } from './components/work/work.component';
 import { VisitorComponent } from './components/visitor/visitor.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'about-me' },
-  { path: 'about-me', component: AboutComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'about' },
+  { path: 'about', component: AboutComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'gallery', component: GalleryComponent },
   { path: 'testimonials', component: TestimonialComponent },

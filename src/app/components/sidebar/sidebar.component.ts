@@ -11,9 +11,10 @@ import { VisitorsService } from 'src/app/services/visitors.service';
 import { Visitors } from 'src/app/models/visitors.model';
 import { TestimonialsService } from 'src/app/services/testimonials.service';
 import { Testimonials } from 'src/app/models/testimonials.model';
-import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
+
+const ipInt = require('ip-to-int');
 
 @Component({ 
   selector: 'app-sidebar',
@@ -34,38 +35,18 @@ export class SidebarComponent implements OnInit {
   faDownload = faDownload;
 
   // like
-  ipAddress?:string;
+  ipAddress:any;
   visitorCountry:any;
 
   visitorIP: any;
   request:any;
   result: any;
-  getlike:any = [];
-  getlikeAll:any = [];
-  getlikeCount:any = [];
 
-  getVisitor:any = [];
-  getVisitorCount:any;
-  getTesti:any = [];
-  getTestiCount:any = [];
-  getLikeToken:any;
-  getVisitorToken:any;
-  getResult: any
-  getVisitorResult: any
-  getIpResult: any;
-  getvisitorAll:any = [];
-  getIp: any;
-  passUserKey: any;
-  userDate: any;
-  passUserVisited: any;
-  passCurrentIp: any;
-  getKeyResult: any;
-  getVisitedResult: any;
-  visitedCount: any;
-  sum: any; 
   boolResult: any;
-  sKeyencoded: string = btoa("Stimul@t0r");
-  
+  ipToInt: any;
+  intToIp: any;
+  getvisitorAll: any;
+
   constructor(
   public likeService: LikesService,
   public testimonialsService: TestimonialsService,
@@ -81,6 +62,13 @@ export class SidebarComponent implements OnInit {
     this.result = await this.request.json();
     this.ipAddress = this.result.ip;
     this.visitorCountry = this.result.country;
+    // convert ip to int
+    this.ipToInt = ipInt(this.ipAddress).toInt();
+    // console.log(this.ipToInt)
+    // convert ip back original
+    // this.intToIp = ipInt(this.ipToInt).toIP();
+    // console.log(this.intToIp)
+
     this.fetchLikes();
     this.fetchVisitors();
     this.fetchTestimonials();
@@ -88,85 +76,43 @@ export class SidebarComponent implements OnInit {
 
   fetchTestimonials(): void {
     this.testimonialsService.getAll().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c=>
-          ({ key: c.payload.key, ...c.payload.val() })
+      map(changesTesimonials =>
+        changesTesimonials.map(a=>
+          ({ key: a.payload.key, ...a.payload.val() })
           )
         )
-    ).subscribe(data => {
-      this.testimonials = data;
-      this.counttestimonials = data.length;
+    ).subscribe(dataTesti => {
+      this.testimonials = dataTesti;
+      this.counttestimonials = dataTesti.length;
     })
   }
 
-  // fetchVisitorIp(): void {
-  //   this.visitorService.getVisitor(this.ipAddress).valueChanges()
-  //   .subscribe((data: Visitors[] | undefined) => {
-  //     this.visitors = data;
-  //     console.log(this.visitors)
-  //   })
-  // }
-  
-  fetchVisitors(): void {
-    let currentDateTime =this.datepipe.transform((new Date), 'MMMM d, y');
+  fetchVisitors(): any {
     this.visitorService.getAll().snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c=>
-          ({ key: c.payload.key, ...c.payload.val() })
+      map(changesAllVisitors =>
+        changesAllVisitors.map(b=>
+          ({ key: b.payload.key, ...b.payload.val() })
           )
         )
-    ).subscribe(data => {
-      this.visitors = data;
-      this.countvisitors = data.length;
-      // console.log(this.visitors)
-      if(this.countvisitors == 0) {
-        // console.log('true')
-        this.getIpResult = this.ipAddress;
-        // this.addVisitors();
-      } else {
-        // console.log('false')
-        this.visitors.forEach((element: any) => {
-          // console.log(element.visited);
-          if(element.user_ip == this.ipAddress){
-            this.boolResult = true;
-            this.passUserKey = element.key;
-            this.userDate = this.datepipe.transform((element.postedon), 'MMMM d, y')
-            this.passUserVisited = element.visited;
-          } else {
-            this.boolResult = false;
-          }
-        });
-        if(this.boolResult == true) {
-          // console.log(currentDateTime)
-          if(this.userDate == currentDateTime) {
-            console.log('Last Visited: ' + this.userDate);
-          } else {
-            this.getKeyResult = this.passUserKey;
-            this.getVisitedResult = this.passUserVisited;
-            // console.log(this.getVisitedResult) 
-            // this.update();
-          }
-        } else {
-          this.getIpResult = this.ipAddress;
-          //  this.addVisitors();
-        }
-      }
+    ).subscribe(dataAllVisitors => {
+      this.visitors = dataAllVisitors;
+      this.countvisitors = dataAllVisitors.length;
     })
  }
 
  fetchLikes(): void {
      this.likeService.getAll().snapshotChanges().pipe(
-       map(changes =>
-        changes.map(c=>
-          ({ key: c.payload.key, ...c.payload.val()})
+       map(changesLikes =>
+        changesLikes.map(d=>
+          ({ key: d.payload.key, ...d.payload.val()})
           )
         )
-     ).subscribe(data => {
-      this.likes = data;
-      this.countLikes = data.length;
+     ).subscribe(dataLikes => {
+      this.likes = dataLikes;
+      this.countLikes = dataLikes.length;
       this.likes.forEach((element: any) => {
         // console.log(element.user_ip);
-        if(element.user_ip == this.ipAddress){
+        if(element.user_ip == this.ipToInt){
           this.visitorIP = element.user_ip;
         }
       });
@@ -177,49 +123,17 @@ export class SidebarComponent implements OnInit {
   addLike(): void {
     let currentDateTime =this.datepipe.transform((new Date), 'yyyy-MM-dd h:mm:ss');
     let data = {
-      user_ip: this.ipAddress,
+      user_ip: this.ipToInt,
       country: this.visitorCountry,
       postedon: currentDateTime
     };
   this.likeService.create(data)
     .then(() => {
-      this.toastr.success("Thank You for Liking!")
+      this.toastr.info("Thanks for the likes!!")
     })
   }
 
-   // update visitor
-   update(): void {
-    this.visitedCount = 1;
-    this.sum = parseInt(this.visitedCount) + parseInt(this.getVisitedResult);
-    // console.log(this.sum);
-    let currentDateTime =this.datepipe.transform((new Date), 'yyyy-MM-dd h:mm:ss');
-    let data = {
-      visited: this.sum,
-      postedon: currentDateTime
-    };
-    console.log(data);
-  this.visitorService.update(this.getKeyResult,data)
-  .then(() => {
-    this.toastr.info("You Visited: " + data.visited + " Times")
-  })
-  }
-
-  // add visitor 
-  addVisitors(): void {
-    let currentDateTime =this.datepipe.transform((new Date), 'yyyy-MM-dd h:mm:ss');
-    this.visitedCount = 1;
-    let data = {
-      user_ip: this.getIpResult,
-      country: this.visitorCountry,
-      visited: this.visitedCount,
-      postedon: currentDateTime
-    };
-
-    this.visitorService.create(data)
-    .then(() => {
-      this.toastr.success("Visitor Added")
-    })
-  }
+   
 
 
 }
