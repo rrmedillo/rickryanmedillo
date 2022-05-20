@@ -37,6 +37,7 @@ export class SidebarComponent implements OnInit {
   // like
   ipAddress:any;
   visitorCountry:any;
+  visitorCity:any;
 
   visitorIP: any;
   request:any;
@@ -62,6 +63,7 @@ export class SidebarComponent implements OnInit {
     this.result = await this.request.json();
     this.ipAddress = this.result.ip;
     this.visitorCountry = this.result.country;
+    this.visitorCity = this.result.city;
     // convert ip to int
     this.ipToInt = ipInt(this.ipAddress).toInt();
     // console.log(this.ipToInt)
@@ -95,7 +97,6 @@ export class SidebarComponent implements OnInit {
           )
         )
     ).subscribe(dataAllVisitors => {
-      this.visitors = dataAllVisitors;
       this.countvisitors = dataAllVisitors.length;
     })
  }
@@ -125,6 +126,7 @@ export class SidebarComponent implements OnInit {
     let data = {
       user_ip: this.ipToInt,
       country: this.visitorCountry,
+      city: this.visitorCity,
       postedon: currentDateTime
     };
   this.likeService.create(data)

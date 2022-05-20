@@ -1,25 +1,28 @@
-import { Component } from '@angular/core';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
-import { faFacebook } from '@fortawesome/free-brands-svg-icons'; 
-import { faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { faMobile } from '@fortawesome/free-solid-svg-icons';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   title = 'Rick Ryan Medillo';
-  
-  faDownload = faDownload;
-  faFacebook = faFacebook;
-  faLinkedin = faLinkedin;
-  faEnvelope = faEnvelope;
-  faMobile = faMobile;
+  showHeader = false;
+  showSidebar = false;
+  showFooter = false;
 
-  currentYear: number = new Date().getFullYear();
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.showHeader = this.activatedRoute.root.firstChild?.snapshot.data['showHeader'] !== false;
+        this.showSidebar = this.activatedRoute.root.firstChild?.snapshot.data['showSidebar'] !== false;
+        this.showFooter = this.activatedRoute.root.firstChild?.snapshot.data['showFooter'] !== false;
+      }
+    });
+  }
 
 }

@@ -32,6 +32,7 @@ export class AboutComponent implements OnInit {
   result: any;
   ipAddress:any;
   visitorCountry:any;
+  visitorCity:any;
 
   visitors?: Visitors[];
   ipToInt: any;
@@ -58,7 +59,8 @@ export class AboutComponent implements OnInit {
     this.result = await this.request.json();
     this.ipAddress = this.result.ip;
     this.visitorCountry = this.result.country;
-    // console.log(this.result.country);
+    this.visitorCity = this.result.city;
+    // console.log(this.visitorCity);
 
     this.ipToInt = ipInt(this.ipAddress).toInt();
     this.fetchVisitorIp();
@@ -81,7 +83,7 @@ export class AboutComponent implements OnInit {
         if(this.getSingleVisitor.length == 0) {
           this.getIpResult = this.ipToInt;
           console.log('fetch single visitor didnt match - (fetchVisitorIp) - add visitor')
-          this.addVisitors();
+          // this.addVisitors();
         } else {
             console.log('fetch single visitor match - (fetchVisitorIp) - get visitor details')
             this.passUserKey = this.getSingleVisitor[0].key;
@@ -93,7 +95,7 @@ export class AboutComponent implements OnInit {
               console.log('not same date! - (fetchVisitorIp) - update visitor times of visit')
               this.getKeyResult = this.passUserKey;
               this.getVisitedResult = this.passUserVisited;
-              this.update();
+              // this.update();
             }
         }
       }
@@ -125,6 +127,7 @@ addVisitors() {
   let data = {
     user_ip: this.getIpResult,
     country: this.visitorCountry,
+    city: this.visitorCity,
     visited: this.visitedCount,
     postedon: currentDateTime
   };

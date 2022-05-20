@@ -27,8 +27,6 @@ declare var navslide: any;
   styleUrls: ['./testimonial.component.css']
 })
 
-
-
 export class TestimonialComponent implements OnInit {
   testimonials?: Testimonials[];
   replies?: Replies[];
@@ -46,7 +44,8 @@ export class TestimonialComponent implements OnInit {
   visitorCountry:any;
   request:any;
   result: any;
-
+  visitorCity:any;
+  
   getTesti:any;
   getAllTesti:any;
   getTestiId:any;
@@ -111,7 +110,8 @@ export class TestimonialComponent implements OnInit {
     this.result = await this.request.json();
     this.ipAddress = this.result.ip;
     this.visitorCountry = this.result.country;
-    // console.log(this.result.ip);
+    this.visitorCity = this.result.city;
+    // console.log(this.visitorCity);
 
     this.fetcTestimonials();
     this.fetcReplies();
@@ -170,13 +170,9 @@ get rF(){
       name: this.form.value.name,
       testimonials: this.form.value.testimonials,
       country: this.visitorCountry,
+      city: this.visitorCity,
       postedon: currentDateTime
     }
-
-    // console.log(this.form.value.name);
-    // console.log(this.form.value.testimonials);
-    // console.log(this.visitorCountry);
-    // console.log(currentDateTime);
 
   this.testimonialsService.create(data).then(() => {
     this.toastr.success("Testimonial has been Posted!", "SUCCESS", {timeOut: 1000})
@@ -195,6 +191,7 @@ get rF(){
       name: this.replyForm.value.name,
       reply: this.replyForm.value.reply,
       country: this.visitorCountry,
+      city: this.visitorCity,
       postedon: currentDateTime
     };
 

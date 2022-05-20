@@ -1,6 +1,7 @@
 import { NgModule, Pipe } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
@@ -27,6 +28,9 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { AngularFireAnalyticsModule } from '@angular/fire/compat/analytics';
 import { environment } from '../environments/environment';
+import { AdminModule } from './components/admin/admin.module';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -38,10 +42,13 @@ import { environment } from '../environments/environment';
     TestimonialComponent,
     ContactComponent,
     VisitorComponent,
-    DateAgoPipe
+    DateAgoPipe,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
+    RouterModule.forRoot([]),
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,
@@ -56,9 +63,15 @@ import { environment } from '../environments/environment';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    AdminModule,
     ToastrModule.forRoot({
       preventDuplicates: true
     })
+  ],
+  exports: [
+    SidebarComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

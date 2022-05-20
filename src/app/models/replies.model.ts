@@ -3,7 +3,8 @@ export class Replies {
     tid?: any;
     name?: any;
     reply?: any;
-    country?: any ;
+    country?: any;
+    city?: any;
     postedon?: any;
     secretKey?: any;
     status?: any;

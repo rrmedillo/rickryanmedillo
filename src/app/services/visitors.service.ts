@@ -13,7 +13,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 export class VisitorsService {
   user_ip?: Visitors;
   status?: [] | any;
-  visitorStatus: Visitors;
+  visitorStatus: Visitors; 
   // visitorData: Observable<Visitors>;
   
   private dbPath = 'visitors';
