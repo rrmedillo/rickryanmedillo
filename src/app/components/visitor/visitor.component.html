@@ -34,6 +34,7 @@
                       </div>
                       <ul class="list-group list-group-flush">
                         <li class="list-group-item">Country<span> {{ getVisitMobile.country }}</span></li>
+                        <li class="list-group-item">City<span> {{ getVisitMobile.City }}</span></li>
                         <li class="list-group-item">Visited <span> {{ getVisitMobile.visited }}</span></li>
                         <li class="list-group-item">Date and Time <span> {{ getVisitMobile.postedon | dateAgo }}</span></li>
                       </ul>
@@ -57,6 +58,7 @@
                         <tr>
                           <th scope="col">IP Address</th>
                           <th scope="col">Country</th>
+                          <th scope="col">City</th>
                           <th scope="col">Visited</th>
                           <th scope="col">Date</th>
                         </tr>
@@ -71,6 +73,7 @@
                           <!-- <td>{{ getVisit.user_ip }}</td> -->
                           <td>{{ convertIp(getVisit.user_ip) }}</td>
                           <td>{{ getVisit.country }}</td>
+                          <td>{{ getVisit.city }}</td>
                           <td>{{ getVisit.visited }}</td>
                           <td>{{ getVisit.postedon | dateAgo }}</td>
                         </tr>

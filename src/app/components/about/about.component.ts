@@ -83,7 +83,7 @@ export class AboutComponent implements OnInit {
         if(this.getSingleVisitor.length == 0) {
           this.getIpResult = this.ipToInt;
           console.log('fetch single visitor didnt match - (fetchVisitorIp) - add visitor')
-          // this.addVisitors();
+          this.addVisitors();
         } else {
             console.log('fetch single visitor match - (fetchVisitorIp) - get visitor details')
             this.passUserKey = this.getSingleVisitor[0].key;
@@ -95,7 +95,7 @@ export class AboutComponent implements OnInit {
               console.log('not same date! - (fetchVisitorIp) - update visitor times of visit')
               this.getKeyResult = this.passUserKey;
               this.getVisitedResult = this.passUserVisited;
-              // this.update();
+              this.update();
             }
         }
       }
