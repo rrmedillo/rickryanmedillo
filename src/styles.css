@@ -310,6 +310,17 @@ span.position {
   margin-top: 20px;
 }
 
+.countdown span {
+  font-size: 26px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+  margin-left: 0.8rem;
+}
+
+.countdown span:first-of-type {
+  margin-left: 0;
+}
+
+
 /* end of name - position*/
 
 div#post_button .modal-body {
@@ -486,6 +497,24 @@ button.btn.btn-danger.btn-reply-override:focus {
 /* end of footer*/
 
 /* testimonials */
+span.reply-icon {
+  display: flex;
+  margin-top: 10px;
+}
+
+span.reply-icon a  {
+  margin-right: 10px;
+  padding: 2px 4px;
+  background-color: #eae3d8;
+  border: 1px solid #cccac7;
+  border-radius: 4px;
+  box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 20%);
+}
+
+ul.comments-list.reply-list {
+  padding-right: 0;
+}
+
 .testi-form {
   border: 1px solid #373e44;
   border-radius: 4px;
@@ -551,11 +580,18 @@ button.btn.btn-danger.btn-reply-override:focus {
 .replyCollapse .card {
   background-color: #eae3d8;
   padding: 10px;
+  margin-top: 12px;
+}
+
+ul#replyToggle {
+  padding-right: 0;
 }
 
 .d-flex.justify-content-start.commentName h5 {
   color: #17a2b8;
-  font-size: 15px;
+  font-size: 14px;
+  padding-top: 12px;
+  text-transform: uppercase;
 }
 
 .d-flex.justify-content-start.commentName h5 span {
@@ -785,16 +821,16 @@ hr.testi-hr {
 }
 
 ul.testi-list {
-	background-color: #d6d9dc;
-  border: 1px solid #d6d9dc;
+	background-color: #373e44;
+  border: 1px solid #3a3833;
   border-radius: 4px;
   box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 20%);
 }
 
 ul.testi-list:nth-child(odd)
 {
-  background-color: #505961;
-  border: 1px solid #505961;
+  background-color: #373e44;
+  border: 1px solid #3a3833;
   border-radius: 4px;
   box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 20%);
 }
@@ -1443,58 +1479,6 @@ h4.write-us {
     border-right: 2px solid #eae3d8;
 }
 
-/* .contact input[type="text"],
-select.form-control {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #fff;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border-radius: 0;
-  color: #fff;
-  padding: .375rem .0rem;
-}
-
-.contact label {
-    color: #bdc8d2;
-    margin-bottom: 0;
-}
-
-.contact input[type="email"],
-select.form-control {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #fff;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border-radius: 0;
-  color: #fff;
-  padding: .375rem .0rem;
-}
-
-
-.contact textarea,
-select.form-control {
-  background: transparent;
-  border: none;
-  border-bottom: 1px solid #fff;
-  -webkit-box-shadow: none;
-  box-shadow: none;
-  border-radius: 0;
-  color: #fff;
-  padding: .375rem .0rem;
-} */
-
-/* .contact .form-control:focus {
-    color: #495057;
-    background-color: transparent;
-    border-color: transparent;
-    outline: 0;
-    color: white;
-    box-shadow: none;
-    border-bottom: 1px solid #fff; 
-} */
-
 .send-button a {
     color: #373e44;
     font-weight: 600;
@@ -1526,6 +1510,11 @@ button#send_email:hover {
   border-color: #eae3d8;
 }
 /* end of contact page */
+
+/* admin */
+
+
+/* end of admin */
 
 /* facebook, linkedin, instagram icon */
 svg.svg-inline--fa.fa-facebook-square.fa-w-14 {

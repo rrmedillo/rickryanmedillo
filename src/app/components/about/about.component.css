@@ -1,0 +1,12 @@
+.countdown {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+
+.bg-gradient-2 {
+    background: #654ea3;
+    background: -webkit-linear-gradient(to right, #f2aa4c, #373e44);
+    background: linear-gradient(to right, #f2aa4c, #373e44);
+    filter: drop-shadow(3px 2px 3px #00080e);
+}

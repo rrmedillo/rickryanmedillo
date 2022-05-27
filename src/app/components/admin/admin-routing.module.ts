@@ -10,7 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 
 const routes: Routes = [
-  {
+  { 
     path: 'admin', 
     component: AdminComponent,
     data: { showHeader: false, showSidebar: false, showFooter: false },

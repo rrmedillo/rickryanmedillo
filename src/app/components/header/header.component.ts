@@ -7,7 +7,7 @@ import { faDownload } from '@fortawesome/free-solid-svg-icons';
 })
 export class HeaderComponent implements OnInit {
   faDownload = faDownload;
-  constructor() { console.log('Header constructor called'); }
+  // constructor() { console.log('Header constructor called'); }
 
   ngOnInit(): void {
   }

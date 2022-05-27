@@ -7,7 +7,10 @@
             <a class="flex-sm-fill text-sm-center nav-link" id="skills-tab" data-toggle="tab" href="#skills" role="tab" aria-controls="skills" aria-selected="false">Skills</a>
             <a class="flex-sm-fill text-sm-center nav-link" id="experience-tab" data-toggle="tab" href="#experience" role="tab" aria-controls="experience" aria-selected="false">Experience</a>
             </nav>
-        </div>  
+        </div>   <!-- <div class="rounded bg-gradient-4 text-white shadow text-center">
+            <p class="font-weight-bold text-uppercase">Let's use some call to actions</p>
+            <div id="clock-c" class="countdown "></div>
+        </div> -->
         
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
@@ -256,7 +259,29 @@
                     </div>
                     
                 </div><!-- end content-right-box-->
-            </div><!-- end fourth-tab-->
-        </div><!-- end tab-content-->
+            </div><!-- end fourth-tab *ngIf=""-->
+        </div><!-- end tab-content currentMonth >= birthMonth-->
+
+        <div *ngIf="currentMonth <= birthMonth">
+            <div class="bg-gradient-2 text-white shadow p-3 text-center mt-3">
+                <p class="mb-0 font-weight-bold text-uppercase">Time until special day</p>
+                <div id="clock-c" class="countdown py-2"></div>
+            </div> 
+        </div>
+        <div *ngIf="currentMonth == birthMonth">
+            <div class="bg-gradient-2 text-white shadow p-3 text-center mt-3">
+                <p class="mb-0 font-weight-bold text-uppercase">Today is my special day</p>
+                <div class="bday countdown py-2">
+                    <span class="font-weight-bold">
+                        <fa-icon [icon]="faCakeCandles" class="faCakeCandles text-warning"></fa-icon> Its my
+                    </span>
+                         {{getMoreAge()}}th 
+                    <span class="font-weight-bold">
+                         birthday! <fa-icon [icon]="faCakeCandles" class="faCakeCandles text-warning"></fa-icon>
+                    </span>
+                </div>
+            </div> 
+        </div>
+        
     </div>
 </div>

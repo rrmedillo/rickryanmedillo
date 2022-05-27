@@ -4,6 +4,7 @@ import { faGraduationCap } from '@fortawesome/free-solid-svg-icons';
 import { faAward } from '@fortawesome/free-solid-svg-icons';
 import { faWrench } from '@fortawesome/free-solid-svg-icons';
 import { faBriefcase } from '@fortawesome/free-solid-svg-icons';
+import { faCakeCandles } from '@fortawesome/free-solid-svg-icons';
 
 import { DatePipe } from '@angular/common';
 import { VisitorsService } from 'src/app/services/visitors.service';
@@ -27,6 +28,7 @@ export class AboutComponent implements OnInit {
   faAward = faAward;
   faWrench = faWrench;
   faBriefcase = faBriefcase;
+  faCakeCandles = faCakeCandles;
 
   request:any;
   result: any;
@@ -45,6 +47,16 @@ export class AboutComponent implements OnInit {
   getVisitedResult: any;
   visitedCount: any;
   sum: any; 
+
+  todayDate: any = new Date();
+  currentMonth: any = new Date().getMonth();
+  datebirthYear = new Date(this.todayDate.getFullYear(), 8, 1);
+  birthMonth = this.datebirthYear.getMonth();
+
+  currentYear: any = new Date().getFullYear();
+  bDay = new Date("9/1/1986");
+  birthYear = this.bDay.getFullYear();
+  myLessAge: any = 0;
   
   constructor(
   public datepipe: DatePipe,
@@ -138,13 +150,6 @@ addVisitors() {
   })
 }
   
-
-  birthYear: number = 1986;
-  birthMonth:number = 9;
-  currentYear: number = new Date().getFullYear();
-  currentMonth: number = new Date().getMonth() + 1;
-  myLessAge: number = 0;
-
   getLessAge() {
    this.myLessAge = this.currentYear - this.birthYear;
     return this.myLessAge - 1;

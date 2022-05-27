@@ -24,8 +24,8 @@ export class RepliesService {
     this.repliesRef = db.list(this.dbPath);
   }
 
-  getReply(user_ip: any) {
-    return this.replyRef = this.db.object(`/replies/` + user_ip);
+  getReply(tid: any): AngularFireList<Replies> {
+    return this.db.list('replies', ref => ref.orderByChild('tid').equalTo(tid));
   }
 
   getAll(): AngularFireList<Replies> {

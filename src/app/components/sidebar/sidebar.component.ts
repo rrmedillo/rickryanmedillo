@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs';
 
 const ipInt = require('ip-to-int');
+declare var countBirth: any;
 
 @Component({ 
   selector: 'app-sidebar',
@@ -58,6 +59,8 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   async ngOnInit(): Promise<void> {
+    
+    new countBirth();
     // geolocation
     this.request = await fetch("https://ipinfo.io/json?token=1509eda3fb61e2");
     this.result = await this.request.json();

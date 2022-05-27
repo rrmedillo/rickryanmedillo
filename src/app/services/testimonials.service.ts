@@ -23,13 +23,13 @@ export class TestimonialsService {
     this.status = this.testimonialStatus.status;
     this.testimonialsRef = db.list(this.dbPath);
   }
-
+ 
   getTesti(key: any) {
-    return this.testimonialRef = this.db.object(`/testimonials/` + key);
+    return this.db.list('testimonials', ref => ref.orderByChild('key').equalTo(key));
   }
 
   getAll(): AngularFireList<Testimonials> {
-    return this.testimonialsRef;
+    return this.db.list('testimonials', ref => ref.orderByChild('key'));
   }
 
   create(testimonials: Testimonials): any {

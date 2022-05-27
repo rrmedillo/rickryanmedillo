@@ -6,7 +6,17 @@
                     <fa-icon [icon]="faComments"></fa-icon> Testimonials
                 </div><!-- end header-title-->
             </div>
-        
+            <!-- <div *ngFor="let getTestimony of combData" >
+                 {{  getTestimony.testimony.name + ' ' + '| COMMENT => ' + getTestimony.testimony.testimonials }} 
+                    <div *ngIf="getTestimony.reply">
+                        <div *ngFor="let c of getTestimony.reply | keyvalue; let i=index; last as last; count as count">
+                                    {{getTestimony.reply[i].name + ' ' + '| REPLY => ' + getTestimony.reply[i].reply }}
+                        <div *ngIf="!last">{{ 0 }}</div>
+                        <div *ngIf="last">{{ count }}</div>
+                    </div>
+                 </div>
+            </div>
+            <br> -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="testi-form">
@@ -62,7 +72,7 @@
                 </div>
             </div>
             <!-- empty testiomonial -->
-            <div class="row" *ngIf="!getTestiResult">
+            <div class="row" *ngIf="!combData">
                 <div class="col-md-12">
                     <ul id="comments-list" class="comments-list">
                         <li>
@@ -80,12 +90,12 @@
             <!-- end of empty testiomonial -->
             <div class="row">
                 <div class="col-md-12">
-                    <ng-template ngFor let-getAllTestimonial [ngForOf]="getTestiResult | paginate
+                    <ng-template ngFor let-getAllTestimonial [ngForOf]="combData | paginate
                     : {
                         itemsPerPage: tableSize,
                         currentPage: page,
                         totalItems: count
-                    }" let-i="index">
+                    }">
                     <ul id="comments-list" class="comments-list testi-list">
                         <li>
                             <div class="comment-main-level">
@@ -93,24 +103,33 @@
                                 
                                 <div class="comment-box">
                                     <div class="comment-head"> 
-                                        <h6 class="comment-name">{{ getAllTestimonial.name }}</h6>
-                                        <span class="badge badge-info badge-comment mr-2 ">{{ getAllTestimonial.country }}</span>
-                                        <span class="postedDate">{{ getAllTestimonial.postedon | dateAgo }}</span>
+                                        <h6 class="comment-name">{{ getAllTestimonial.testimony.name }}</h6>
+                                        <span class="badge badge-info badge-comment mr-2 ">{{ getAllTestimonial.testimony.country }}</span>
+                                        <span class="postedDate">{{ getAllTestimonial.testimony.postedon | dateAgo }}</span>
                                     </div>
                                     <div class="comment-content">
-                                        {{ getAllTestimonial.testimonials }}
-                                        
+                                        {{ getAllTestimonial.testimony.testimonials }}
+                                        <span class="reply-icon" >
+                                            <div *ngIf="getAllTestimonial.reply">
+                                                <div *ngFor="let c of getAllTestimonial.reply | keyvalue;  let i=index; last as last; count as count">
+                                                    <div *ngIf="last">
+                                                        <a href="#" data-toggle="collapse" type="button" [attr.data-target]="'#replyToggle'+ getAllTestimonial.testimony.testimoniKey" aria-expanded="false" [attr.aria-controls]="'replyToggle'+ getAllTestimonial.testimony.testimoniKey" >
+                                                            <fa-icon [icon]="faComment" class="fComment"></fa-icon>
+                                                            <span class="badge badge-default ml-1" >
+                                                                {{ count }}
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <a href="#" data-toggle="collapse" type="button" [attr.data-target]="'#replyArea'+ getAllTestimonial.testimony.testimoniKey" aria-expanded="false" [attr.aria-controls]="'replyArea'+ getAllTestimonial.testimony.testimoniKey" (click)="onItemSelector(getAllTestimonial.testimony.testimoniKey)"><fa-icon [icon]="faMailReply"></fa-icon></a>
+                                        </span>
                                     </div>
                                 </div>
                         </div>
                             <div class="row">
-                                <div class="col-md-12 button-reply text-right">
-                                    <button class="btn btn-primary savebtn" type="button" data-toggle="collapse" [attr.data-target]="'#replyArea'+ getAllTestimonial.key" aria-expanded="false" [attr.aria-controls]="'replyArea'+ getAllTestimonial.key" (click)="onItemSelector(getAllTestimonial.key)"><fa-icon [icon]="faMailReply"></fa-icon> Reply</button>
-                                </div>
-                            </div>
-                            <div class="row">
                                 <div class="col-md-12">
-                                    <div class="collapse replyCollapse" id="replyArea{{getAllTestimonial.key}}">
+                                    <div class="collapse replyCollapse" id="replyArea{{getAllTestimonial.testimony.testimoniKey}}">
                                         <div class="card card-body">
                                             <form [formGroup]="replyForm" (ngSubmit)="addReplies()">
                                                 <div class="row">
@@ -121,8 +140,8 @@
                                                             </div>
                                                             <input
                                                             formControlName="name"
-                                                            id="name{{ getAllTestimonial.key }}"
-                                                            name="name{{ getAllTestimonial.key }}"
+                                                            id="name{{ getAllTestimonial.testimony.testimoniKey }}"
+                                                            name="name{{ getAllTestimonial.testimony.testimoniKey }}"
                                                             type="text"
                                                             class="form-control"
                                                             placeholder="Name"
@@ -142,8 +161,8 @@
                                                             <textarea
                                                             formControlName="reply" 
                                                             class="form-control" 
-                                                            id="reply{{ getAllTestimonial.key }}" 
-                                                            name="reply{{ getAllTestimonial.key }}" 
+                                                            id="reply{{ getAllTestimonial.testimony.testimoniKey }}" 
+                                                            name="reply{{ getAllTestimonial.testimony.testimoniKey }}" 
                                                             placeholder="Your Reply" 
                                                             rows="3"
                                                             [ngClass]="{'is-invalid':rF['reply'].touched && rF['reply'].invalid, 
@@ -155,15 +174,15 @@
                                                         </div>
                                                     </div>
                                                 </div><!-- end row-->
-                                                <div class="row mt-4">
+                                                <div class="row">
                                                     <div class="col-md-8">
                                                         <div class="d-flex justify-content-start commentName">
-                                                            <h5>Reply to <span>{{ getAllTestimonial.name }}</span>  's Post</h5>
+                                                            <h5>Reply to <span>{{ getAllTestimonial.testimony.name }}</span>  's Post</h5>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4">
                                                         <div class="d-flex justify-content-end button-post">
-                                                            <button class="btn btn-primary savebtn" role="button" id="{{ getAllTestimonial.key }}" name="{{ getAllTestimonial.key }}" type="submit" [disabled]="!replyForm.valid"><fa-icon [icon]="faCommentDots"></fa-icon> Post</button>
+                                                            <button class="btn btn-primary savebtn" role="button" id="{{ getAllTestimonial.testimony.testimoniKey }}" name="{{ getAllTestimonial.testimony.testimoniKey }}" type="submit" [disabled]="!replyForm.valid"><fa-icon [icon]="faCommentDots"></fa-icon> Post</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -173,24 +192,28 @@
                                     </div>
                                 </div>
                             </div>
+                            <!-- <div class="collapse replyCollapse" id="replyToggle"> -->
                             <!-- Reply area -->
-                            <ul class="comments-list reply-list">
-                                <li *ngFor="let getAllReplies of getReplyResult">
-                                    <!-- reply box-->
-                                    <div class="comment-box" *ngIf="getAllReplies.tid == getAllTestimonial.key ">
-                                        <div class="comment-head">
-                                            <h6 class="comment-name replyname">{{getAllReplies.name}}</h6>
-                                            <span class="badge badge-info mr-2">{{getAllReplies.country}}</span>
-                                            <span class="postedDate">{{ getAllReplies.postedon | dateAgo }} </span>
-                                        </div>
-                                        <div class="comment-content">
-                                            {{getAllReplies.reply}}
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul><!-- end of reply-list -->
+                            <div *ngIf="getAllTestimonial.reply">
+                                <div *ngFor="let c of getAllTestimonial.reply | keyvalue;  let r=index">
+                                    <ul class="collapse comments-list reply-list" id="replyToggle{{getAllTestimonial.testimony.testimoniKey}}">
+                                        <li>
+                                            <!-- reply box-->
+                                            <div class="comment-box" >
+                                                <div class="comment-head">
+                                                    <h6 class="comment-name replyname">{{getAllTestimonial.reply[r].name}}</h6>
+                                                    <span class="badge badge-info mr-2">{{getAllTestimonial.reply[r].country}}</span>
+                                                    <span class="postedDate">{{ getAllTestimonial.reply[r].postedon | dateAgo }} </span>
+                                                </div>
+                                                <div class="comment-content">
+                                                    {{getAllTestimonial.reply[r].reply}}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul><!-- end of reply-list -->
+                                </div>
+                            </div>
                         </li>
-            
 
                     </ul><!-- end of comment-list -->
                 </ng-template>
@@ -198,7 +221,7 @@
             </div>
             
             
-            <div class="row mt-4">
+            <div class="row mt-2">
                 <div class="col-md-2">
                     <div class="d-flex justify-content-start">
                         <select (change)="onTableSizeChange($event)" class="custom-select select-pagi">
@@ -209,7 +232,7 @@
                     </div>
                 </div>
                 <div class="col-md-10">
-                    <div class="d-flex justify-content-end pagi-numbers">
+                    <div class="d-flex justify-content-end pagi-numbers mt-2">
                         <pagination-controls
                             previousLabel="Prev"
                             nextLabel="Next"

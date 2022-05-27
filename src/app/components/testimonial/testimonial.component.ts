@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone} from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { TestimonialsService } from 'src/app/services/testimonials.service';
 import { RepliesService } from 'src/app/services/replies.service';
@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 
 import { faComments } from '@fortawesome/free-regular-svg-icons';
+import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import { faTimesCircle } from '@fortawesome/free-solid-svg-icons';
@@ -17,7 +18,7 @@ import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { faLocation } from '@fortawesome/free-solid-svg-icons';
 import { Testimonials } from 'src/app/models/testimonials.model';
 import { faMailReply } from '@fortawesome/free-solid-svg-icons';
-import { map } from 'rxjs';
+import { combineLatest, map, switchMap } from 'rxjs';
 
 declare var navslide: any;
 
@@ -28,10 +29,12 @@ declare var navslide: any;
 })
 
 export class TestimonialComponent implements OnInit {
+  
   testimonials?: Testimonials[];
   replies?: Replies[];
 
   faComments = faComments;
+  faComment = faComment;
   faCommentAlt = faCommentAlt;
   faUser = faUser;
   faTimesCircle = faTimesCircle;
@@ -60,22 +63,24 @@ export class TestimonialComponent implements OnInit {
 
   getTestiToken: any
   getTestiAll: any;
-  getTestiResult: any;
+  getTestiResult:any;
 
   getReplyToken: any 
   getReplyAll: any;
   getReplyResult: any;
   counttestimonials: any
+  countReplies: any
 
   form!: FormGroup; 
   replyForm!: FormGroup; 
-
+  replyName:any;
   page: number = 1;
   count: number = 0;
   tableSize: number = 2;
   tableSizes: any = [2, 8, 12, 16];
   
   tIdValue: any;
+  combData: any;
 
   constructor(
     private testimonialsService: TestimonialsService,
@@ -84,7 +89,7 @@ export class TestimonialComponent implements OnInit {
     private router: Router,
     private ngZone: NgZone,
     public datepipe: DatePipe,
-    private toastr: ToastrService
+    private toastr: ToastrService,
     ) { 
       
       this.form = this.formBuilder.group({
@@ -100,8 +105,10 @@ export class TestimonialComponent implements OnInit {
 
     onItemSelector(value :any) {
       this.tIdValue = value;
-    // console.log(this.tIdValue);
+    console.log(this.tIdValue);
     }
+    
+    
 
    async ngOnInit(): Promise<void> {
     new navslide();
@@ -111,49 +118,45 @@ export class TestimonialComponent implements OnInit {
     this.ipAddress = this.result.ip;
     this.visitorCountry = this.result.country;
     this.visitorCity = this.result.city;
-    // console.log(this.visitorCity);
-
-    this.fetcTestimonials();
-    this.fetcReplies();
+    this.testimonialsData();
 }
 
-fetcReplies(): void {
-  this.repliesService.getAll().snapshotChanges().pipe(
-    map(changes =>
-      changes.map(c=>
-        ({ key: c.payload.key, ...c.payload.val() })
+
+testimonialsData() {
+  return this.testimonialsService.getAll().snapshotChanges().pipe(
+    switchMap((actions) => combineLatest(
+      actions.map((a) => {
+        const testimoniData = a.payload.val();
+        const testimoniKey = a.payload.key;
+        // testimoniData!.key = a.payload.key;
+        return this.repliesService.getReply(testimoniKey).snapshotChanges()
+        .pipe(
+          map((replyAction) => {
+            // const repId = replyAction.map(b => { return b.payload.key;})
+            const repData = replyAction.map(b => ({ key: b.payload.key, ...b.payload.val()}))
+            //  return { user: { uid: userData.uid, displayName: userData.displayName }, ...actData };
+            return { testimony: {testimoniKey, ...testimoniData}, reply: { ...repData} }
+          })
         )
-      )
-  ).subscribe(data => {
-    this.replies = data.reverse();
-    this.getReplyResult = this.replies;
-    this.getReplyTid = this.getReplyResult.id; 
-    // console.log(this.getReplyResult)
+      })
+    ))
+  ).subscribe({
+    next: data => {
+      this.combData = data.reverse();
+      // console.log(this.combData)
+    }
   })
 }
 
-fetcTestimonials(): void {
-  this.testimonialsService.getAll().snapshotChanges().pipe(
-    map(changes =>
-      changes.map(c=>
-        ({ key: c.payload.key, ...c.payload.val() })
-        )
-      )
-  ).subscribe(data => {
-    this.testimonials = data.reverse();
-    this.getTestiResult = this.testimonials;
-    // console.log(this.getTestiResult)
-  })
-}
 
 onTableDataChange(event: any) {
   this.page = event;
-  this.fetcTestimonials();
+  this.testimonialsData();
 }
 onTableSizeChange(event: any): void {
   this.tableSize = event.target.value;
   this.page = 1;
-  this.fetcTestimonials();
+  this.testimonialsData();
 } 
 
 get f(){

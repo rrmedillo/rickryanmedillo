@@ -38,8 +38,47 @@ function toDataURL(url) {
         .then((blob) => {
             return URL.createObjectURL(blob);
         });
-}
+} 
 
 $('#datatableexample').DataTable( {
     responsive: true
 } );
+
+// $(document).ready(function () {
+    function toggleNav() {
+    $('#sidebarCollapse').on('click', function () {
+        $('#sidebar').toggleClass('active');
+        $(this).toggleClass('active');
+    });
+}
+
+function countBirth() {
+    var calcNewYear = setInterval(function(){
+        date_future = new Date(new Date().getFullYear(), 8, 1);
+        //date_future = new Date(new Date().getFullYear() +1, 0, 1);
+        date_now = new Date();
+
+        seconds = Math.floor((date_future - (date_now))/1000);
+        minutes = Math.floor(seconds/60);
+        hours = Math.floor(minutes/60);
+        days = Math.floor(hours/24);
+        
+        hours = hours-(days*24);
+        minutes = minutes-(days*24*60)-(hours*60);
+        seconds = seconds-(days*24*60*60)-(hours*60*60)-(minutes*60);
+        
+
+        $("#clock-c").html(''
+        + '<span class="font-weight-bold">' + days + '</span> Day'
+        + '<span class="font-weight-bold">' + hours + '</span> Hr'
+        + '<span class="font-weight-bold">' + minutes + '</span> Min'
+        + '<span class="font-weight-bold">' + seconds + '</span> Sec');
+        // $("#clock-c").text("Days: " + days + " Hours: " + hours + " Minutes: " + minutes + " Seconds: " + seconds);
+        // $("#clock-c").text(''
+        // + '<span class="h1 font-weight-bold">%D</span> Day%!d'
+        // + '<span class="h1 font-weight-bold">%H</span> Hr'
+        // + '<span class="h1 font-weight-bold">%M</span> Min'
+        // + '<span class="h1 font-weight-bold">%S</span> Sec'
+        // );
+    },1000);
+}
