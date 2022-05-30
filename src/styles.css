@@ -434,6 +434,7 @@ button.btn.btn-danger.btn-reply-override:focus {
 .content-right-box.override-content {
   border-bottom: none;
   padding: 15px;
+  border-bottom: 5px solid #f2aa4c;
 }
 
 .content-right-box.override-content .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
@@ -484,7 +485,7 @@ button.btn.btn-danger.btn-reply-override:focus {
 
 .right-footer.text-center h5 {
     margin-bottom: 20px;
-    border-bottom: 2px solid #f2aa4c;
+    border-bottom: 2px solid #eae3d8;
     text-align: center;
     padding: 5px 0 15px 0;
     color: #f2aa4c;
@@ -822,7 +823,7 @@ hr.testi-hr {
 
 ul.testi-list {
 	background-color: #373e44;
-  border: 1px solid #3a3833;
+  border: 1px solid #3c464e;
   border-radius: 4px;
   box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 20%);
 }
@@ -830,7 +831,7 @@ ul.testi-list {
 ul.testi-list:nth-child(odd)
 {
   background-color: #373e44;
-  border: 1px solid #3a3833;
+  border: 1px solid #3c464e;
   border-radius: 4px;
   box-shadow: 2px 2px 8px 0 rgb(0 0 0 / 20%);
 }
@@ -1176,14 +1177,14 @@ ul.p-info li {
 }
 
 .skills-box {
-    border: 1px solid #f5e3c8;
+    border: 1px solid #f2aa4c;
     border-radius: 4px;
     margin-bottom: 20px;
     max-height: 320px;
 }
 
 .skill-header {
-    background-color: #f5e3c8;
+    background-color: #f2aa4c;
     padding: 5px 10px;
     color: #373e44;
     font-weight: 600;
@@ -1213,7 +1214,7 @@ p.p_margin {
 
 .education-level {
     font-size: 16px;
-    background-color: #f5e3c8;
+    background-color: #f2aa4c;
     color: #373e44;
     padding: 2px 15px;
     border-radius: 14px;
@@ -1235,11 +1236,11 @@ p.p_margin {
 
 .school-year.text-right {
     float: right;
-    color: #666e75;
+    color: #766246;
 }
 
 .education.expe-box {
-    border: 1px solid #f5e3c8;
+    border: 1px solid #f2aa4c;
     padding: 10px 15px;
 }
 
