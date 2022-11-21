@@ -16,7 +16,7 @@ export class WorkComponent implements OnInit {
   
   projects: Project[] = [
     new Project('Online Public Access Catalog', 'St. Cecilias College - Cebu Library', 'assets/image/sccopac-thumb.jpg', 'https://rickmedillo.000webhostapp.com'),
-    new Project('A Wonder Paradise', 'Ruvi Cave - Resort', 'assets/image/ruvi-template-thumb.jpg', 'https://ruvicaveresortcebu.000webhostapp.com/')
+    new Project('A Wonder Paradise', 'Ruvi Cave - Resort', 'assets/image/ruvi-template-thumb.jpg', 'https://ruvicave-resort.000webhostapp.com/')
   ];
   
   templates: Template[] = [
