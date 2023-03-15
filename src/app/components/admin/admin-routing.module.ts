@@ -8,7 +8,7 @@ import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
-
+ 
 const routes: Routes = [
   { 
     path: 'admin', 

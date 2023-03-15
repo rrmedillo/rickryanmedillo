@@ -131,7 +131,7 @@ this.visitorService.update(this.getKeyResult,data)
   this.toastr.info("You Visited: " + data.visited + " Times")
 })
 }
-
+ 
 // add visitor 
 addVisitors() {
   let currentDateTime =this.datepipe.transform((new Date), 'yyyy-MM-dd h:mm:ss');

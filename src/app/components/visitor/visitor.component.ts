@@ -35,7 +35,7 @@ export class VisitorComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.fetchVisitorsView();
+    this.fetchVisitorsView(); 
     this.fetchVisitorsMobile();
     }
 

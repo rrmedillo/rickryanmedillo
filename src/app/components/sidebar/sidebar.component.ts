@@ -76,7 +76,7 @@ export class SidebarComponent implements OnInit {
 
     this.fetchLikes();
     this.fetchVisitors();
-    this.fetchTestimonials();
+    this.fetchTestimonials(); 
   }
 
   fetchTestimonials(): void {

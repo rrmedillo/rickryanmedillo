@@ -139,7 +139,7 @@ testimonialsData() {
           })
         )
       })
-    ))
+    )) 
   ).subscribe({
     next: data => {
       this.combData = data.reverse();
@@ -166,7 +166,7 @@ get f(){
 get rF(){
   return this.replyForm.controls;
 }
-
+ 
   addTesti(): void {
     var currentDateTime =this.datepipe.transform((new Date), 'yyyy-MM-dd h:mm:ss');
     var data = {
