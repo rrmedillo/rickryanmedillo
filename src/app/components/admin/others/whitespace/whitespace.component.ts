@@ -10,7 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
 // declare var whitespaceChecker: any;
-const whitespaceChecker:any = require('ip-to-int');
+// const whitespaceChecker:any = require('ip-to-int');
 
 @Component({
   selector: 'app-whitespace',
@@ -23,8 +23,9 @@ export class WhitespaceComponent implements OnInit {
   faComments = faComments;
   faCommentAlt = faCommentAlt;
   whitespaceValue: any;
+  whitespaceChecker: any;
   whitespaceForm!: FormGroup;
-  whitespace: FormControl = new FormControl("", [Validators.required, Validators.maxLength(256)]);
+  whitespace: FormControl = new FormControl("", Validators.required);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,7 +39,7 @@ export class WhitespaceComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    // new whitespaceChecker();
+    
     // this.whitespaceValue = new whitespaceChecker(this.whitespaceForm.value.whitespace);
   }
 
@@ -47,11 +48,12 @@ export class WhitespaceComponent implements OnInit {
   }
 
   whitespaceCheck(): void {
-    // this.whitespaceValue = this.whitespaceForm.value.whitespace;
+    this.whitespaceValue = this.whitespaceForm.value.whitespace;
+    this.whitespaceChecker = new RegExp(String.fromCharCode(160), "gi");
     
-   console.log(this.whitespaceValue);
+   console.log(this.whitespaceValue.trim());
   }
-  reloadCurrentRoute() {
+  reloadCurrentRoute() { 
     let currentUrl = this.router.url;
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
         this.router.navigate([currentUrl]);

@@ -11,7 +11,7 @@ function navslide() {
         .animate({ width: "toggle" }, 400);
     };
 
-    
+     
 }
 
 document.addEventListener('DOMContentLoaded', function(){
@@ -85,9 +85,9 @@ function countBirth() {
     
 }
 
-function whitespaceChecker(value) {
-    var re = new RegExp(String.fromCharCode(160), "gi");
-    $(value).each(function(){
-          $(this).html($(this)[0].textContent.replace(re, " "));
-    });
-}
+// function whitespaceChecker(value) {
+//     var re = new RegExp(String.fromCharCode(160), "gi");
+//     $(value).each(function(){
+//           $(this).html($(this)[0].textContent.replace(re, " "));
+//     });
+// }
