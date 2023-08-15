@@ -8,7 +8,7 @@
         <ul class="list-unstyled components">
             <p class="text-center">Dummy Heading</p>
             <li [ngClass]="home.classList.contains('active') ? 'active' : 'null'">
-                <a #home href="#" routerLinkActive="active" routerLink="dashboard"><fa-icon [icon]="faDashboard" class="fcomment mr-2"></fa-icon>Home</a>
+                <a #home href="#" routerLinkActive="null" routerLink="dashboard" ><fa-icon [icon]="faDashboard" class="fcomment mr-2"></fa-icon>Home</a>
             </li>
             <li [ngClass]="users.classList.contains('active') ? 'active' : 'null'">
                 <a #users href="#" routerLinkActive="active" routerLink="user-list"><fa-icon [icon]="faUsers" class="fcomment mr-2"></fa-icon>Users</a>
@@ -25,8 +25,8 @@
             <li>
                 <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"><fa-icon [icon]="faFile" class="fcomment mr-2"></fa-icon>Others</a>
                 <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li>
-                        <a href="#"><fa-icon [icon]="faBolt" class="fcomment mr-2"></fa-icon>Electric Bills</a>
+                    <li [ngClass]="whitespace.classList.contains('active') ? 'active' : 'null'">
+                        <a #whitespace href="#" routerLinkActive="active" routerLink="whitespace-remover"><fa-icon [icon]="faBolt" class="fcomment mr-2"></fa-icon>Whitespace Remover</a>
                     </li>
                 </ul>
             </li>

@@ -29,7 +29,7 @@ async function downloadFile(fileName) {
     link.click();
 }
 
-
+ 
 function toDataURL(url) {
     return fetch(url)
         .then((response) => {
@@ -57,7 +57,7 @@ function countBirth() {
         date_future = new Date(new Date().getFullYear(), 8, 1);
         //date_future = new Date(new Date().getFullYear() +1, 0, 1);
         date_now = new Date();
-
+ 
         seconds = Math.floor((date_future - (date_now))/1000);
         minutes = Math.floor(seconds/60);
         hours = Math.floor(minutes/60);
@@ -81,4 +81,13 @@ function countBirth() {
         // + '<span class="h1 font-weight-bold">%S</span> Sec'
         // );
     },1000);
+
+    
+}
+
+function whitespaceChecker(value) {
+    var re = new RegExp(String.fromCharCode(160), "gi");
+    $(value).each(function(){
+          $(this).html($(this)[0].textContent.replace(re, " "));
+    });
 }

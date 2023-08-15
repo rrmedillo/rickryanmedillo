@@ -8,9 +8,10 @@ import { UserDetailComponent } from './user/user-detail/user-detail.component';
 import { UserListComponent } from './user/user-list/user-list.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { WhitespaceComponent } from './others/whitespace/whitespace.component';
  
 const routes: Routes = [
-  { 
+  {  
     path: 'admin', 
     component: AdminComponent,
     data: { showHeader: false, showSidebar: false, showFooter: false },
@@ -18,7 +19,7 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent
-      },
+      }, 
       {
         path: 'user-create',
         component: UserCreateComponent
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'signup',
         component: RegistrationComponent
+      },
+      {
+        path: 'whitespace-remover',
+        component: WhitespaceComponent
       }
     ]
   }
