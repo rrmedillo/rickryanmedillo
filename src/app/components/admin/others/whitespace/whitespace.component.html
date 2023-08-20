@@ -8,21 +8,21 @@
 
                                     <div class="col-md-12">
                                         <div class="input-group mb-3">
-                                            <div class="input-group-prepend override-input-prepend">
+                                            <!-- <div class="input-group-prepend override-input-prepend">
                                                 <fa-icon [icon]="faEnvelope" class="fcomment"></fa-icon>
-                                            </div>
+                                            </div> -->
                                             <textarea
+                                            #ref1
                                                formControlName="whitespace" 
                                                 class="form-control" 
                                                 id="whitespace" 
                                                 name="whitespace" 
                                                 placeholder="Enter your text" 
-                                                rows="5"
                                                 [ngClass]="{'is-invalid':f['whitespace'].touched && f['whitespace'].invalid, 
                                                             'is-valid': f['whitespace'].untouched && f['whitespace'].valid}">
                                             </textarea>
                                             <div *ngIf="f['whitespace'].touched && f['whitespace'].invalid" class="invalid-feedback">
-                                                Please provide a text with an "&nbsp;" tagged.
+                                                Please provide a text.
                                             </div>
                                         </div>
                                     </div>
@@ -36,6 +36,6 @@
                     </form>
             </div><!-- end contact-->
 
-<!-- <span *ngIf="true">Value: {{ ref1.value }}</span> -->
+            <!-- <span *ngIf="true">Value: {{ ref1.value }}</span> -->
             <p [innerHTML]="whitespaceValue" ></p>
     </div>

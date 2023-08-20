@@ -4,3 +4,8 @@
 .visibleForm {
 	display: block
 }
+textarea {
+	resize: horizontal;
+	overflow: hidden;
+	border-left: 20px solid #f2aa4c;
+}

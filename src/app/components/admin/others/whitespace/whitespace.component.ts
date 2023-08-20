@@ -9,7 +9,7 @@ import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
-declare function whitespaceChecker(any: any): any;
+declare var autosize: any;
 
 @Component({
   selector: 'app-whitespace',
@@ -38,8 +38,7 @@ export class WhitespaceComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    
-    // this.whitespaceValue = new whitespaceChecker(this.whitespaceForm.value.whitespace);
+    new autosize();
   }
 
   get f(){
@@ -48,8 +47,8 @@ export class WhitespaceComponent implements OnInit {
 
   whitespaceCheck(): void {
     let nbspVal = this.whitespaceForm.value.whitespace;
-    this.whitespaceValue = nbspVal.replace(/&nbsp;/g, "");
-    console.log(this.whitespaceValue);
+    this.whitespaceValue = nbspVal.replace(/&nbsp;/g, " ");
+    // console.log(nbspVal.length);
   }
   reloadCurrentRoute() { 
     let currentUrl = this.router.url;
