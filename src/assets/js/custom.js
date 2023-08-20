@@ -85,9 +85,9 @@ function countBirth() {
     
 }
 
-// function whitespaceChecker(value) {
-//     var re = new RegExp(String.fromCharCode(160), "gi");
-//     $(value).each(function(){
-//           $(this).html($(this)[0].textContent.replace(re, " "));
-//     });
-// }
+function whitespaceChecker() {
+    var re = new RegExp(String.fromCharCode(160), "gi");
+    $('textarea').each(function(){
+         return $(this).html($(this)[0].textContent.replace(re, ""));
+    });
+}

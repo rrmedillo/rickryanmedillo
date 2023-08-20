@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faMailReply } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
-import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { faComments } from '@fortawesome/free-regular-svg-icons';
@@ -9,8 +9,7 @@ import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
-// declare var whitespaceChecker: any;
-// const whitespaceChecker:any = require('ip-to-int');
+declare function whitespaceChecker(any: any): any;
 
 @Component({
   selector: 'app-whitespace',
@@ -23,7 +22,7 @@ export class WhitespaceComponent implements OnInit {
   faComments = faComments;
   faCommentAlt = faCommentAlt;
   whitespaceValue: any;
-  whitespaceChecker: any;
+  // whitespaceChecker: any;
   whitespaceForm!: FormGroup;
   whitespace: FormControl = new FormControl("", Validators.required);
 
@@ -48,10 +47,9 @@ export class WhitespaceComponent implements OnInit {
   }
 
   whitespaceCheck(): void {
-    this.whitespaceValue = this.whitespaceForm.value.whitespace;
-    this.whitespaceChecker = new RegExp(String.fromCharCode(160), "gi");
-    
-   console.log(this.whitespaceValue.trim());
+    let nbspVal = this.whitespaceForm.value.whitespace;
+    this.whitespaceValue = nbspVal.replace(/&nbsp;/g, "");
+    console.log(this.whitespaceValue);
   }
   reloadCurrentRoute() { 
     let currentUrl = this.router.url;

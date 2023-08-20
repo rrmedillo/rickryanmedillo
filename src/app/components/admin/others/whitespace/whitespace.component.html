@@ -12,7 +12,7 @@
                                                 <fa-icon [icon]="faEnvelope" class="fcomment"></fa-icon>
                                             </div>
                                             <textarea
-                                                formControlName="whitespace" 
+                                               formControlName="whitespace" 
                                                 class="form-control" 
                                                 id="whitespace" 
                                                 name="whitespace" 
@@ -35,6 +35,7 @@
                                 </div>
                     </form>
             </div><!-- end contact-->
-            <!-- <p>{{ this.whitespaceValue }}</p> -->
-            <p [innerHTML]="this.whitespaceValue"></p>
+
+<!-- <span *ngIf="true">Value: {{ ref1.value }}</span> -->
+            <p [innerHTML]="whitespaceValue" ></p>
     </div>
