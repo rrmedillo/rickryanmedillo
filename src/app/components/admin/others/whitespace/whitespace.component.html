@@ -1,41 +1,63 @@
-<!-- <p>whitespace works!</p> -->
-    <div class="col-md-12 col-lg-8">
+<div class="row">
+    <!-- <p>whitespace works!</p> -->
+    <div class="col-md-12 col-lg-6">
             
-            <div class="whitespace-form">
-                    
-                <form [formGroup]="whitespaceForm" id="gform" (ngSubmit)="whitespaceCheck()">
-                                <div class="row">
+        <div class="whitespace-form">
+                
+            <form [formGroup]="whitespaceForm" id="gform" (ngSubmit)="whitespaceCheck()">
+                            <div class="row">
 
-                                    <div class="col-md-12">
-                                        <div class="input-group mb-3">
-                                            <!-- <div class="input-group-prepend override-input-prepend">
-                                                <fa-icon [icon]="faEnvelope" class="fcomment"></fa-icon>
-                                            </div> -->
-                                            <textarea
-                                               #txtVal
-                                               formControlName="whitespace" 
-                                                class="form-control" 
-                                                id="whitespace" 
-                                                name="whitespace" 
-                                                placeholder="Enter your text" 
-                                                [ngClass]="{'is-invalid':f['whitespace'].touched && f['whitespace'].invalid, 
-                                                            'is-valid': f['whitespace'].untouched && f['whitespace'].valid}">
-                                            </textarea>
-                                            <div *ngIf="f['whitespace'].touched && f['whitespace'].invalid" class="invalid-feedback">
-                                                Please provide a text.
-                                            </div>
+                                <div class="col-md-12 ">
+                                    <div class="mb-3">
+                                        <!-- <div class="input-group-prepend override-input-prepend">
+                                            <fa-icon [icon]="faEnvelope" class="fcomment"></fa-icon>
+                                        </div> -->
+                                        <textarea
+                                           #txtVal
+                                           formControlName="whitespace" 
+                                            class="form-control" 
+                                            id="whitespace" 
+                                            name="whitespace" 
+                                            placeholder="Enter your text" 
+                                            [ngClass]="{'is-invalid':f['whitespace'].touched && f['whitespace'].invalid, 
+                                                        'is-valid': f['whitespace'].untouched && f['whitespace'].valid}">
+                                        </textarea>
+                                        <div *ngIf="f['whitespace'].touched && f['whitespace'].invalid" class="invalid-feedback">
+                                            Please provide a text.
                                         </div>
                                     </div>
-                                </div><!-- end row-->
+                                </div>
                                 <div class="col-md-12 d-flex justify-content-end">
+                                    <button class="btn btn-info checkWhiteSpace mr-3" role="button" type="submit">
+                                        <fa-icon [icon]="faPaste"></fa-icon> 
+                                        Paste Text
+                                    </button>
                                     <button class="btn btn-primary checkWhiteSpace" role="button" type="submit" [disabled]="!whitespaceForm.valid">
-                                        <fa-icon [icon]="faMailReply"></fa-icon> 
-                                        Generate
+                                        <fa-icon [icon]="faHardDrive"></fa-icon> 
+                                        Format Text
                                     </button>
                                 </div>
-                    </form>
-            </div><!-- end contact-->
+                            </div><!-- end row-->
+                </form>
+        </div><!-- end contact-->
 
-            <!-- <span *ngIf="txtVal.value">Value: {{ txtVal.value }}</span> -->
-            <p [innerHTML]="whitespaceValue" ></p>
+        
+</div>
+
+<div class="col-md-12 col-lg-6" *ngIf="whitespaceValue">
+    <!-- <span *ngIf="txtVal.value">Value: {{ txtVal.value }}</span> -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="formatResult">
+                <p id="copyResult" [innerHTML]="whitespaceValue" #copyResult></p>
+            </div>
+        </div>
+        <div class="col-md-12  d-flex justify-content-end">
+            <button class="btn btn-primary checkWhiteSpace" onclick="copyToClipboard('copyResult')"  role="button" type="submit" [disabled]="!whitespaceForm.valid">
+                <fa-icon [icon]="faCopy"></fa-icon> 
+                Copy Text
+            </button>
+        </div>
     </div>
+</div>
+</div>

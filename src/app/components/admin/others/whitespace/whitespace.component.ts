@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { faMailReply } from '@fortawesome/free-solid-svg-icons';
-import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
-import { faComments } from '@fortawesome/free-regular-svg-icons';
-import { faCommentAlt } from '@fortawesome/free-regular-svg-icons';
+import { faHardDrive } from '@fortawesome/free-solid-svg-icons';
+import { faPaste } from '@fortawesome/free-regular-svg-icons';
+import { faCopy } from '@fortawesome/free-regular-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
@@ -17,10 +16,9 @@ declare var autosize: any;
   styleUrls: ['./whitespace.component.css']
 })
 export class WhitespaceComponent implements OnInit {
-  faMailReply = faMailReply;
-  faEnvelope = faEnvelope;
-  faComments = faComments;
-  faCommentAlt = faCommentAlt;
+  faHardDrive = faHardDrive;
+  faPaste = faPaste;
+  faCopy = faCopy;
   whitespaceValue: any;
   // whitespaceChecker: any;
   whitespaceForm!: FormGroup;
@@ -50,6 +48,8 @@ export class WhitespaceComponent implements OnInit {
     this.whitespaceValue = nbspVal.replace(/&nbsp;/g, " ");
     // console.log(nbspVal.length);
   }
+
+
   reloadCurrentRoute() { 
     let currentUrl = this.router.url;
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {

@@ -97,9 +97,32 @@ function autosize(){
     textarea.addEventListener('keydown', autosize);
     var el = this;
     setTimeout(function(){
-        el.style.cssText = 'height:auto; padding:0';
+        el.style = 'height:auto; padding:0';
         // for box-sizing other than "content-box" use:
-        el.style.cssText = '-moz-box-sizing:content-box';
-        el.style.cssText = 'height:' + el.scrollHeight + 'px';
+        el.style = '-moz-box-sizing:content-box';
+        el.style = 'height:' + el.scrollHeight + 'px';
     },0);
+}
+
+async function copyToClipboard(e) {
+    selectText(e);
+    document.execCommand("copy");
+}
+
+function selectText(e) {
+    e = document.getElementById(e);
+
+    if (document.body.createTextRange) {
+        const r = document.body.createTextRange();
+        r.moveToElementText(e);
+        r.select();
+    } else if (window.getSelection) {
+        const s = window.getSelection();
+        const r = document.createRange();
+        r.selectNodeContents(e);
+        s.removeAllRanges();
+        s.addRange(r);
+    } else {
+        console.warn("Could not select text in "+e+": Unsupported browser.");
+    }
 }

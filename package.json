@@ -39,6 +39,7 @@
     "ip": "^1.1.8",
     "ip-num": "^1.3.4",
     "ip-to-int": "^0.3.1",
+    "ngx-clipboard": "^16.0.0",
     "ngx-pagination": "^5.1.1",
     "ngx-toaster": "^1.0.1",
     "ngx-toastr": "^14.3.0",

@@ -7,5 +7,36 @@
 textarea {
 	resize: horizontal;
 	overflow: hidden;
-	border-left: 20px solid #f2aa4c;
+	border-left: 10px solid #f2aa4c;
+}
+
+button.btn.btn-primary.checkWhiteSpace:disabled {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.paddingRemove {
+	padding-right: 0px;
+    padding-left: 0px;
+}
+
+.marginNegative {
+	margin-right: -15px;
+    margin-left: -15px;
+}
+
+textarea#whitespace {
+    border-radius:0;
+}
+
+.formatResult p {
+    padding: 16px;
+    overflow: auto;
+    /* font-size: 85%; */
+	width: 100%;
+    line-height: 1.45;
+    color: #fff;
+    background-color: #484f58;
+    /* border-radius: 0.25rem; */
+	border-left: 10px solid #f2aa4c;
 }

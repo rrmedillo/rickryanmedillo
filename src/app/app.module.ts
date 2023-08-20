@@ -31,6 +31,7 @@ import { environment } from '../environments/environment';
 import { AdminModule } from './components/admin/admin.module';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+// import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { FooterComponent } from './components/footer/footer.component';
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     AdminModule,
+    // ClipboardModule,
     ToastrModule.forRoot({
       preventDuplicates: true
     })
