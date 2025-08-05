@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 async function downloadFile(fileName) {
     //const url = 'https://rickryan-portfolio.web.app/assets/rickryanmedillo-resume.docx';
-    const url = 'https://rickryan-portfolio.web.app/assets/rickryanmedillo-resume.docx';
+    const url = 'https://rickryan-portfolio.web.app/assets/rrmedillo-resume.pdf';
 
     const link = document.createElement('a');
     link.href = await toDataURL(url);
